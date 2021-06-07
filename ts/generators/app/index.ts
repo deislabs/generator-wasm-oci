@@ -12,6 +12,7 @@ import { clang } from './languages/c';
 import { assemblyScript } from './languages/assembly-script';
 import { failed } from './utils/errorable';
 import { swift } from './languages/swift';
+import { tinygo } from './languages/tinygo';
 
 const REGISTRY_CHOICE_ACR = "Azure Container Registry";
 const REGISTRY_CHOICE_NONE = "I don't want to publish to an OCI registry";
@@ -52,7 +53,8 @@ module.exports = class extends Generator {
           'AssemblyScript',
           'C',
           'Rust',
-          'Swift'
+          'Swift',
+          'TinyGo'
         ],
         default: 'Rust'
       },
@@ -161,6 +163,8 @@ function languageProvider(language: string): Language {
       return clang;
     case 'Swift':
       return swift;
+    case 'TinyGo':
+      return tinygo;
     default:
       throw new Error("You didn't choose a language");
   }
